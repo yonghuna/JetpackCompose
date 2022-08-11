@@ -8,8 +8,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -17,8 +19,12 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment.Companion.TopCenter
+import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -39,138 +45,90 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     //ListListScopeSample()
                     //SimpleListView()
-                    fruitsList.add(FruitModel("Apple", R.drawable.chiken))
-                    fruitsList.add(FruitModel("Orange", R.drawable.chiken))
-                    fruitsList.add(FruitModel("Banana", R.drawable.chiken))
-                    fruitsList.add(FruitModel("Strawberry", R.drawable.chiken))
-                    fruitsList.add(FruitModel("Mango", R.drawable.chiken))
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.White)
-                    ) {
-                        items(fruitsList) { model ->
-                            ListRow(model = model)
-                        }
-                    }
+//                    fruitsList.add(FruitModel("Apple", R.drawable.chiken))
+//                    fruitsList.add(FruitModel("Orange", R.drawable.chiken))
+//                    fruitsList.add(FruitModel("Banana", R.drawable.chiken))
+//                    fruitsList.add(FruitModel("Strawberry", R.drawable.chiken))
+//                    fruitsList.add(FruitModel("Mango", R.drawable.chiken))
+//                    LazyColumn(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .background(Color.White)
+//                    ) {
+//                        items(fruitsList) { model ->
+//                            ListRow(model = model)
+//                        }
+//                    }
 
                 }
             }
         }
     }
 }
-@Composable
-fun ListListScopeSample(){
-    LazyColumn {
-        // Add a single item
-        item {
-            Text(text = "Header")
-        }
-
-        // Add 3 items
-        items(3) { index ->
-            Text(text = "First List items : $index")
-        }
-
-        // Add 2 items
-        items(2) { index ->
-            Text(text = "Second List Items: $index")
-        }
-
-        // Add another single item
-        item {
-            Text(text = "Footer")
-        }
-    }
-}
-
-private val countryList =
-    mutableListOf("India", "Pakistan", "China", "United States")
-
-private val fruitsList = mutableListOf<FruitModel>()
 
 
 
-private val listModifier = Modifier
-    .fillMaxSize()
-    .background(Color.Gray)
-    .padding(10.dp)
 
-private val textStyle = TextStyle(fontSize = 20.sp, color = Color.White)
 
 @Composable
-fun SimpleListView() {
-    LazyColumn(modifier = listModifier) {
-        items(countryList) { country ->
-            Text(text = country, style = textStyle)
-        }
-    }
-}
-
-data class FruitModel(val name:String, val image : Int)
-
-@Composable
-fun ListRow(model: FruitModel) {
-    Scaffold(topBar =  {
-        TopAppBar(title =  {Text(text = "TopAppbar")}
-            , backgroundColor = Color.DarkGray)}){
-        Text(text = "ㅎㅇ")
-    }
-
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-
-            .wrapContentHeight()
+fun KotlinWorldCard(order: Int) {
+    Card(
+        Modifier
+            .padding(12.dp)
+            .border(width = 4.dp, color = Color.Black)
             .fillMaxWidth()
-            .background(Color.Black)
+            .height(60.dp)
     ) {
-        Image(
-            painter = painterResource(id = model.image),
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(100.dp)
-                .padding(5.dp)
-        )
-        Text(
-            text = model.name,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.White
-        )
+        Box(contentAlignment = Alignment.Center) {
+            Image(
+                painter = painterResource(R.drawable.chiken),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .padding(5.dp)
+                    .size(60.dp)
+                    .align(Alignment.TopStart)
+
+            )
+            Text(
+                modifier = Modifier
+                    .align(Alignment.TopCenter),
+                text = "개발하는 LEE",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White
+            )
+            Text(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter),
+                text = "일해라",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White
+            )
+
+
+        }
     }
 
+
 }
-
-
-
-
-
 
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetpacTutorialTheme {
-        //ScrollBoxes()
-        //ListListScopeSample()
-        //SimpleListView()
-        fruitsList.add(FruitModel("Apple", R.drawable.chiken))
-        fruitsList.add(FruitModel("Orange", R.drawable.chiken))
-        fruitsList.add(FruitModel("Banana", R.drawable.chiken))
-        fruitsList.add(FruitModel("Strawberry", R.drawable.chiken))
-        fruitsList.add(FruitModel("Mango", R.drawable.chiken))
+        TopAppBar(
+            title = { Text(text = "AppBar") }
+        )
         LazyColumn(
-
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
         ) {
-            items(fruitsList) { model ->
-                ListRow(model = model)
+            items(10){
+                KotlinWorldCard(order = it)
             }
+
         }
     }
 }
