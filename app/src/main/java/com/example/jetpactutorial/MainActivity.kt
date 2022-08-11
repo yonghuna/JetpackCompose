@@ -83,9 +83,8 @@ class MainActivity : ComponentActivity() {
 fun KotlinWorldCard(order: Int) {
     Card(
         Modifier
-            .padding(10.dp)
             .fillMaxWidth()
-            .height(60.dp),
+            .padding(10.dp),
         elevation = 10.dp,
         shape = RoundedCornerShape(12.dp)
     ) {
@@ -103,28 +102,27 @@ fun KotlinWorldCard(order: Int) {
                     .padding(5.dp)
                     .size(60.dp)
             )
+            Column(
+
+            ) {
+                Text(
+                    text = "개발하는 LEE",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+                Text(
+                    text = "일해라",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+
+
+            }
         }
 
-        Column(
-            modifier = Modifier
-                .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = "개발하는 LEE",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black
-            )
-            Text(
-                text = "일해라",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black
-            )
 
-
-        }
     }
 }
 
